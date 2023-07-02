@@ -4,8 +4,6 @@ import {
   Container,
   Meals,
   Percent,
-  PercentSubtitle,
-  PercentTitle,
   SectionHeaderTitle,
   Subtitle,
 } from "./styles";
@@ -16,6 +14,7 @@ import { Section } from "@components/Section";
 import { useNavigation } from "@react-navigation/native";
 import { Route } from "@routes/enums";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Highlight } from "@components/Highlight";
 
 export function Home() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -36,7 +35,7 @@ export function Home() {
   ]);
 
   const handleGoStatisticsScreen = () => {
-    navigation.navigate(Route.STATISTICS);
+    navigation.navigate(Route.STATISTICS, { percentage: mealsPercentage });
   };
 
   return (
@@ -44,8 +43,10 @@ export function Home() {
       <Header />
       <Percent activeOpacity={0.7} onPress={handleGoStatisticsScreen}>
         <ClickIcon />
-        <PercentTitle>{mealsPercentage}%</PercentTitle>
-        <PercentSubtitle>of meals in the diet</PercentSubtitle>
+        <Highlight
+          title={`${mealsPercentage}%`}
+          subtitle="of meals in the diet"
+        />
       </Percent>
       <Meals>
         <Subtitle>Meals</Subtitle>

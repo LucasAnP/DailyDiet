@@ -11,7 +11,6 @@ export const Container = styled(SafeAreaView)`
 
 export const Percent = styled.TouchableOpacity`
   width: 100%;
-  height: 102px;
 
   background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
 
