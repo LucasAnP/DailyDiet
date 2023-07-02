@@ -52,9 +52,13 @@ export const Subtitle = styled.Text`
     font-family: ${theme.FONT_FAMILY.REGULAR};
     font-size: ${theme.FONT_SIZE.medium}px;
     color: ${theme.COLORS.GRAY_100};
-  `}
+  `};
+
+  margin-bottom: 8px;
 `;
 
 export const Meals = styled.View`
   flex: 1;
+
+  margin-top: 40px;
 `;
