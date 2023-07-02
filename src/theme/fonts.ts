@@ -1,11 +1,36 @@
 export const FONT_FAMILY = {
-  REGULAR: "Roboto_400Regular",
-  BOLD: "Roboto_700Bold",
+  REGULAR: "NunitoSans_400Regular",
+  BOLD: "NunitoSans_700Bold",
 };
 
 export const FONT_SIZE = {
-  SM: 14,
-  MD: 16,
-  LG: 18,
-  XL: 24,
+  /**
+   * 12
+   */
+  regular: 12,
+
+  /**
+   * 14
+   */
+  xRegular: 14,
+
+  /**
+   * 16
+   */
+  medium: 16,
+
+  /**
+   * 18
+   */
+  xMedium: 18,
+
+  /**
+   * 24
+   */
+  large: 24,
+
+  /**
+   * 32
+   */
+  xLarge: 32,
 };
