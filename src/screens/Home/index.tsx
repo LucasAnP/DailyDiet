@@ -6,6 +6,7 @@ import {
   Percent,
   PercentSubtitle,
   PercentTitle,
+  SectionHeaderTitle,
   Subtitle,
 } from "./styles";
 import { useState } from "react";
@@ -43,11 +44,17 @@ export function Home() {
         <Button title="New meal" />
         <SectionList
           sections={dailyMeals}
-          keyExtractor={(_, index) => index}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => (
-            <Section time={item.time} title={item.title} />
+            <Section
+              time={item.time}
+              title={item.title}
+              insideDiet={item.insideDiet}
+            />
           )}
-          renderSectionHeader={({ section: { date } }) => <></>}
+          renderSectionHeader={({ section: { date } }) => (
+            <SectionHeaderTitle>{date}</SectionHeaderTitle>
+          )}
         />
       </Meals>
     </Container>

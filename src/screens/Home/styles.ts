@@ -57,6 +57,15 @@ export const Subtitle = styled.Text`
   margin-bottom: 8px;
 `;
 
+export const SectionHeaderTitle = styled.Text`
+  margin-top: 32px;
+  ${({ theme }) => css`
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    font-size: ${theme.FONT_SIZE.xMedium}px;
+    color: ${theme.COLORS.GRAY_100};
+  `};
+`;
+
 export const Meals = styled.View`
   flex: 1;
 

@@ -15,7 +15,7 @@ export function Section({ time, title, insideDiet }: Props) {
         <Time>{time}</Time>
       </TimeContainer>
       <Title numberOfLines={1}>{title}</Title>
-      <CircleIcon />
+      <CircleIcon insideDiet={insideDiet} />
     </Container>
   );
 }
