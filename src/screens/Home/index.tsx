@@ -19,14 +19,14 @@ export function Home() {
     {
       date: "13/02/25",
       data: [
-        { title: "Primeira refeicao", insideDiet: true },
-        { title: "Segunda refeicao", insideDiet: false },
+        { title: "Primeira refeicao", insideDiet: true, time: "18:00" },
+        { title: "Segunda refeicao", insideDiet: false, time: "20:00" },
       ],
     },
 
     {
       date: "02/07/23",
-      data: [{ title: "Primeira refeicao", insideDiet: true }],
+      data: [{ title: "Primeira refeicao", insideDiet: true, time: "20:00" }],
     },
   ]);
 
@@ -44,7 +44,9 @@ export function Home() {
         <SectionList
           sections={dailyMeals}
           keyExtractor={(_, index) => index}
-          renderItem={({ item }) => <Section date={item.date} />}
+          renderItem={({ item }) => (
+            <Section time={item.time} title={item.title} />
+          )}
           renderSectionHeader={({ section: { date } }) => <></>}
         />
       </Meals>

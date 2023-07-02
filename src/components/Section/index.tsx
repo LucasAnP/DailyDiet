@@ -1,13 +1,21 @@
 import { MealStorageDTO } from "@storage/meal/mealStorageDTO";
-import { Container } from "./styles";
+import { CircleIcon, Container, Time, TimeContainer, Title } from "./styles";
 import { FlatListProps } from "react-native";
 
 interface Props {
-  date: string;
+  time: string;
   title: string;
   insideDiet: boolean;
 }
 
-export function Section({ date, title, insideDiet }: Props) {
-  return <Container></Container>;
+export function Section({ time, title, insideDiet }: Props) {
+  return (
+    <Container>
+      <TimeContainer>
+        <Time>{time}</Time>
+      </TimeContainer>
+      <Title numberOfLines={1}>{title}</Title>
+      <CircleIcon />
+    </Container>
+  );
 }
