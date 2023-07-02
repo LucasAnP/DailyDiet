@@ -13,8 +13,12 @@ import { useState } from "react";
 import { SectionList } from "react-native";
 import { Button } from "@components/Button";
 import { Section } from "@components/Section";
+import { useNavigation } from "@react-navigation/native";
+import { Route } from "@routes/enums";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export function Home() {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [mealsPercentage, setMealsPercentage] = useState(0);
   const [dailyMeals, setDailyMeals] = useState([
     {
@@ -31,10 +35,14 @@ export function Home() {
     },
   ]);
 
+  const handleGoStatisticsScreen = () => {
+    navigation.navigate(Route.STATISTICS);
+  };
+
   return (
     <Container>
       <Header />
-      <Percent activeOpacity={0.7}>
+      <Percent activeOpacity={0.7} onPress={handleGoStatisticsScreen}>
         <ClickIcon />
         <PercentTitle>{mealsPercentage}%</PercentTitle>
         <PercentSubtitle>of meals in the diet</PercentSubtitle>
