@@ -7,19 +7,21 @@ import {
   SectionHeaderTitle,
   Subtitle,
 } from "./styles";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { SectionList } from "react-native";
 import { Button } from "@components/Button";
 import { Section } from "@components/Section";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { Route } from "@routes/enums";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Highlight } from "@components/Highlight";
+import { calculeIfMealsInDiet } from "@utils/CalculeIfMealsInDiet";
+import { MealStorageDTO } from "@storage/meal/mealStorageDTO";
 
 export function Home() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [mealsPercentage, setMealsPercentage] = useState(0);
-  const [dailyMeals, setDailyMeals] = useState([
+  const [dailyMeals, setDailyMeals] = useState<MealStorageDTO[]>([
     {
       date: "13/02/25",
       data: [
@@ -35,8 +37,22 @@ export function Home() {
   ]);
 
   const handleGoStatisticsScreen = () => {
-    navigation.navigate(Route.STATISTICS, { percentage: mealsPercentage });
+    navigation.navigate(Route.STATISTICS, {
+      percentage: mealsPercentage,
+      meals: dailyMeals,
+    });
   };
+
+  const calculePercent = () => {
+    const { percentDiet } = calculeIfMealsInDiet(dailyMeals);
+    setMealsPercentage(percentDiet);
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      calculePercent();
+    }, [])
+  );
 
   return (
     <Container>

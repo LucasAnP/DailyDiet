@@ -1,7 +1,9 @@
 export interface MealStorageDTO {
-  name: string;
-  description: string;
-  date: Date;
-  time: string;
-  insideDiet: boolean;
+  date: string;
+  data: {
+    name: string;
+    description: string;
+    time: string;
+    insideDiet: boolean;
+  };
 }
