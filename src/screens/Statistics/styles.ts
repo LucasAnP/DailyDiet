@@ -1,15 +1,18 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled, { css } from "styled-components/native";
 
-export const Container = styled(SafeAreaView)`
+type PercentProps = {
+  negative?: boolean;
+};
+
+export const Container = styled(SafeAreaView)<PercentProps>`
   flex: 1;
-  background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
+  background-color: ${({ theme, negative = false }) =>
+    negative ? theme.COLORS.RED_LIGHT : theme.COLORS.GREEN_LIGHT};
 `;
 
 export const HeaderContainer = styled.View`
   padding: 24px 24px 34px 24px;
-
-  background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
 `;
 
 export const Content = styled.View`

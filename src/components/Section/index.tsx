@@ -1,6 +1,4 @@
-import { MealStorageDTO } from "@storage/meal/mealStorageDTO";
 import { CircleIcon, Container, Time, TimeContainer, Title } from "./styles";
-import { FlatListProps } from "react-native";
 
 interface Props {
   time: string;

@@ -6,9 +6,9 @@ type Props = TouchableOpacityProps & {
   addIcon?: boolean;
 };
 
-export function Button({ title, addIcon = true }: Props) {
+export function Button({ title, addIcon = true, ...rest }: Props) {
   return (
-    <Container activeOpacity={0.7}>
+    <Container activeOpacity={0.7} {...rest}>
       {addIcon && <Icon />}
       <Text>{title}</Text>
     </Container>

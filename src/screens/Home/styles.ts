@@ -2,6 +2,10 @@ import { ArrowUpRight } from "phosphor-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled, { css } from "styled-components/native";
 
+type PercentProps = {
+  negative?: boolean;
+};
+
 export const Container = styled(SafeAreaView)`
   flex: 1;
   padding: 24px;
@@ -9,10 +13,11 @@ export const Container = styled(SafeAreaView)`
   background-color: ${({ theme }) => theme.COLORS.GRAY_700};
 `;
 
-export const Percent = styled.TouchableOpacity`
+export const Percent = styled.TouchableOpacity<PercentProps>`
   width: 100%;
 
-  background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
+  background-color: ${({ theme, negative = false }) =>
+    negative ? theme.COLORS.RED_LIGHT : theme.COLORS.GREEN_LIGHT};
 
   margin-top: 32px;
   padding: 20px 16px;

@@ -40,7 +40,12 @@ export function Home() {
     navigation.navigate(Route.STATISTICS, {
       percentage: mealsPercentage,
       meals: dailyMeals,
+      negative: mealsPercentage < 50,
     });
+  };
+
+  const handleGoNewMeal = () => {
+    navigation.navigate(Route.NEWMEAL);
   };
 
   const calculePercent = () => {
@@ -57,7 +62,11 @@ export function Home() {
   return (
     <Container>
       <Header />
-      <Percent activeOpacity={0.7} onPress={handleGoStatisticsScreen}>
+      <Percent
+        activeOpacity={0.7}
+        onPress={handleGoStatisticsScreen}
+        negative={mealsPercentage < 50}
+      >
         <ClickIcon />
         <Highlight
           title={`${mealsPercentage}%`}
@@ -66,7 +75,7 @@ export function Home() {
       </Percent>
       <Meals>
         <Subtitle>Meals</Subtitle>
-        <Button title="New meal" />
+        <Button title="New meal" onPress={handleGoNewMeal} />
         <SectionList
           sections={dailyMeals}
           keyExtractor={(_, index) => index.toString()}

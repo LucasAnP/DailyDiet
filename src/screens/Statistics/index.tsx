@@ -19,11 +19,12 @@ import { MealStorageDTO } from "@storage/meal/mealStorageDTO";
 type RouteParams = {
   percentage: number;
   meals: MealStorageDTO[];
+  negative?: boolean;
 };
 
 export function Statistics() {
   const route = useRoute();
-  const { percentage, meals } = route?.params as RouteParams;
+  const { percentage, meals, negative } = route?.params as RouteParams;
   const [mealsValue, setMealsValue] = useState(0);
   const [mealsInsideDiet, setMealsInsideDiet] = useState(0);
   const [mealsOutsideDiet, setMealsOutsideDiet] = useState(0);
@@ -45,7 +46,7 @@ export function Statistics() {
   }, []);
 
   return (
-    <Container>
+    <Container negative={negative}>
       <HeaderContainer>
         <Header showBackButton />
         <Highlight title={`${percentage}%`} subtitle="of meals in the diet" />
