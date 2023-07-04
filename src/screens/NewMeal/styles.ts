@@ -1,5 +1,6 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled, { css } from "styled-components/native";
+import { TextInputMask } from "react-native-masked-text";
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
@@ -57,7 +58,7 @@ export const Description = styled.View`
 
 export const DescriptionInput = styled.TextInput``;
 
-export const Date = styled.TextInput`
+export const DateInput = styled(TextInputMask)`
   width: 100%;
   padding: 14px;
   margin-right: 20px;
@@ -66,7 +67,7 @@ export const Date = styled.TextInput`
   border: 1px solid ${({ theme }) => theme.COLORS.GRAY_500};
 `;
 
-export const Time = styled.TextInput`
+export const Time = styled(TextInputMask)`
   width: 100%;
   padding: 14px;
 

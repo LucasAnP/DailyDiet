@@ -6,12 +6,10 @@ export const Container = styled.View`
 
   flex-direction: row;
   align-items: center;
-  justify-content: center;
 `;
 
 export const BackButton = styled.TouchableOpacity`
-  position: absolute;
-  left: 0;
+  flex: 1;
 `;
 
 export const BackIcon = styled(ArrowLeft).attrs(({ theme }) => ({
@@ -19,9 +17,15 @@ export const BackIcon = styled(ArrowLeft).attrs(({ theme }) => ({
 }))``;
 
 export const Title = styled.Text`
+  flex: 1;
+  text-align: center;
   ${({ theme }) => css`
     font-family: ${theme.FONT_FAMILY.BOLD};
     font-size: ${theme.FONT_SIZE.xMedium}px;
     color: ${theme.COLORS.GRAY_100};
-  `}
+  `};
+`;
+
+export const HeaderPos = styled.View`
+  flex: 1;
 `;

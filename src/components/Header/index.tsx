@@ -1,5 +1,5 @@
 import LogoImg from "@assets/images/Logo.svg";
-import { BackButton, BackIcon, Container, Title } from "./styles";
+import { BackButton, BackIcon, Container, HeaderPos, Title } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
 type Props = {
@@ -24,6 +24,7 @@ export function Header({ showBackButton = false, title }: Props) {
         </BackButton>
       )}
       {title && <Title>{title}</Title>}
+      <HeaderPos />
     </Container>
   );
 }

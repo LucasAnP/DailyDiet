@@ -5,7 +5,7 @@ import {
   Buttons,
   Container,
   Content,
-  Date,
+  DateInput,
   Description,
   DescriptionInput,
   HeaderContainer,
@@ -18,11 +18,34 @@ import {
 import { OptionsButton } from "@components/OptionsButton";
 import { Button } from "@components/Button";
 
-type whichSelectedProps = "FIRST" | "SECOND";
+type whichSelectedProps = "FIRST" | "SECOND" | "";
 
 export function NewMeal() {
   const [selected, setSelected] = useState(false);
   const [whichSelected, setWhichSelected] = useState<whichSelectedProps>("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  var today = new Date();
+  const [date, setDate] = useState(
+    today.toLocaleDateString("en-GB").toString()
+  );
+  const [hour, setHour] = useState(
+    today.getHours() +
+      ":" +
+      today.getMinutes() +
+      ":" +
+      today.getSeconds().toString()
+  );
+
+  function handleSubmitForm() {
+    console.log({
+      name,
+      description,
+      date,
+      hour,
+      whichSelected,
+    });
+  }
 
   return (
     <Container>
@@ -31,22 +54,43 @@ export function NewMeal() {
       </HeaderContainer>
       <Content>
         <InputLabel>Name</InputLabel>
-        <InputName />
+        <InputName value={name} onChangeText={setName} numberOfLines={1} />
 
         <InputLabel>Description</InputLabel>
         <Description>
-          <DescriptionInput />
+          <DescriptionInput
+            value={description}
+            onChangeText={setDescription}
+            multiline
+            numberOfLines={8}
+          />
         </Description>
 
         <Row>
           <InputColumn style={{ marginRight: 20 }}>
             <InputLabel>Date</InputLabel>
-            <Date />
+            <DateInput
+              value={date}
+              onChangeText={setDate}
+              type="datetime"
+              options={{
+                format: "DD/MM/YYYY",
+              }}
+              keyboardType="numeric"
+            />
           </InputColumn>
 
           <InputColumn>
             <InputLabel>Hour</InputLabel>
-            <Time />
+            <Time
+              value={hour}
+              onChangeText={setHour}
+              type="datetime"
+              options={{
+                format: "HH:mm",
+              }}
+              keyboardType="numeric"
+            />
           </InputColumn>
         </Row>
         <InputLabel>Is it inside diet?</InputLabel>
@@ -68,7 +112,13 @@ export function NewMeal() {
           />
         </Buttons>
         <ButtonContainer>
-          <Button title="Register meal" />
+          <Button
+            title="Register meal"
+            disabled={
+              !(selected && !!name && !!description && !!date && !!hour)
+            }
+            onPress={handleSubmitForm}
+          />
         </ButtonContainer>
       </Content>
     </Container>
