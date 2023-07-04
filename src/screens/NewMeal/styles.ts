@@ -45,14 +45,17 @@ export const InputName = styled.TextInput`
   margin-bottom: 24px;
 `;
 
-export const Description = styled.TextInput`
+export const Description = styled.View`
   width: 100%;
+
   min-height: 142px;
   max-height: 142px;
   padding: 14px;
   border-radius: 6px;
   border: 1px solid ${({ theme }) => theme.COLORS.GRAY_500};
 `;
+
+export const DescriptionInput = styled.TextInput``;
 
 export const Date = styled.TextInput`
   width: 100%;
@@ -84,4 +87,9 @@ export const InputColumn = styled.View`
 export const Buttons = styled.View`
   flex-direction: row;
   gap: 8px;
+`;
+
+export const ButtonContainer = styled.View`
+  width: 100%;
+  margin-top: 140px;
 `;

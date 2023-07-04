@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Header } from "@components/Header";
 import {
+  ButtonContainer,
   Buttons,
   Container,
   Content,
   Date,
   Description,
+  DescriptionInput,
   HeaderContainer,
   InputColumn,
   InputLabel,
@@ -14,6 +16,7 @@ import {
   Time,
 } from "./styles";
 import { OptionsButton } from "@components/OptionsButton";
+import { Button } from "@components/Button";
 
 type whichSelectedProps = "FIRST" | "SECOND";
 
@@ -31,7 +34,9 @@ export function NewMeal() {
         <InputName />
 
         <InputLabel>Description</InputLabel>
-        <Description />
+        <Description>
+          <DescriptionInput />
+        </Description>
 
         <Row>
           <InputColumn style={{ marginRight: 20 }}>
@@ -62,6 +67,9 @@ export function NewMeal() {
             isSelected={whichSelected === "SECOND"}
           />
         </Buttons>
+        <ButtonContainer>
+          <Button title="Register meal" />
+        </ButtonContainer>
       </Content>
     </Container>
   );
