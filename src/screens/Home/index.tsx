@@ -79,14 +79,18 @@ export function Home() {
 
         <FlatList
           data={dailyMeals}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => (
             <>
               <SectionHeaderTitle>{item.date}</SectionHeaderTitle>
-              <Section
-                time={item.data.time}
-                title={item.data.name}
-                insideDiet={item.data.insideDiet}
-              />
+              {item.data.map((item) => (
+                <Section
+                  key={(_, index) => item.name + index.toString()}
+                  time={item.time}
+                  title={item.name}
+                  insideDiet={item.insideDiet}
+                />
+              ))}
             </>
           )}
         />

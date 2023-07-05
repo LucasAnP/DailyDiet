@@ -46,12 +46,14 @@ export function NewMeal() {
     try {
       const newMealData = {
         date,
-        data: {
-          name,
-          description,
-          time: hour,
-          insideDiet: whichSelected === "FIRST" ? true : false,
-        },
+        data: [
+          {
+            name,
+            description,
+            time: hour,
+            insideDiet: whichSelected === "FIRST" ? true : false,
+          },
+        ],
       };
 
       await mealAdd(newMealData);

@@ -5,5 +5,5 @@ export interface MealStorageDTO {
     description: string;
     time: string;
     insideDiet: boolean;
-  };
+  }[];
 }
