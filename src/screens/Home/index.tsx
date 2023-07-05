@@ -1,3 +1,5 @@
+import { useState, useCallback } from "react";
+import { FlatList } from "react-native";
 import { Header } from "@components/Header";
 import {
   ClickIcon,
@@ -7,8 +9,6 @@ import {
   SectionHeaderTitle,
   Subtitle,
 } from "./styles";
-import { useState, useCallback } from "react";
-import { SectionList } from "react-native";
 import { Button } from "@components/Button";
 import { Section } from "@components/Section";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -17,24 +17,21 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Highlight } from "@components/Highlight";
 import { calculeIfMealsInDiet } from "@utils/CalculeIfMealsInDiet";
 import { MealStorageDTO } from "@storage/meal/mealStorageDTO";
+import { mealGetAll } from "@storage/meal/mealGetAll";
 
 export function Home() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [mealsPercentage, setMealsPercentage] = useState(0);
-  const [dailyMeals, setDailyMeals] = useState<MealStorageDTO[]>([
-    {
-      date: "13/02/25",
-      data: [
-        { title: "Primeira refeicao", insideDiet: true, time: "18:00" },
-        { title: "Segunda refeicao", insideDiet: false, time: "20:00" },
-      ],
-    },
+  const [dailyMeals, setDailyMeals] = useState<MealStorageDTO[]>([]);
 
-    {
-      date: "02/07/23",
-      data: [{ title: "Primeira refeicao", insideDiet: true, time: "20:00" }],
-    },
-  ]);
+  async function getMeals() {
+    try {
+      const mealsOfStorage = await mealGetAll();
+      setDailyMeals(mealsOfStorage);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleGoStatisticsScreen = () => {
     navigation.navigate(Route.STATISTICS, {
@@ -49,13 +46,16 @@ export function Home() {
   };
 
   const calculePercent = () => {
-    const { percentDiet } = calculeIfMealsInDiet(dailyMeals);
-    setMealsPercentage(percentDiet);
+    if (mealsPercentage > 0) {
+      const { percentDiet } = calculeIfMealsInDiet(dailyMeals);
+      setMealsPercentage(percentDiet);
+    }
   };
 
   useFocusEffect(
     useCallback(() => {
       calculePercent();
+      getMeals();
     }, [])
   );
 
@@ -76,18 +76,18 @@ export function Home() {
       <Meals>
         <Subtitle>Meals</Subtitle>
         <Button title="New meal" onPress={handleGoNewMeal} />
-        <SectionList
-          sections={dailyMeals}
-          keyExtractor={(_, index) => index.toString()}
+
+        <FlatList
+          data={dailyMeals}
           renderItem={({ item }) => (
-            <Section
-              time={item.time}
-              title={item.title}
-              insideDiet={item.insideDiet}
-            />
-          )}
-          renderSectionHeader={({ section: { date } }) => (
-            <SectionHeaderTitle>{date}</SectionHeaderTitle>
+            <>
+              <SectionHeaderTitle>{item.date}</SectionHeaderTitle>
+              <Section
+                time={item.data.time}
+                title={item.data.name}
+                insideDiet={item.data.insideDiet}
+              />
+            </>
           )}
         />
       </Meals>

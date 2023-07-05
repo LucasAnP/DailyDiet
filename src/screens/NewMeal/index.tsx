@@ -17,6 +17,11 @@ import {
 } from "./styles";
 import { OptionsButton } from "@components/OptionsButton";
 import { Button } from "@components/Button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MEAL_COLLECTION } from "@storage/storageConfig";
+import { mealAdd } from "@storage/meal/mealAdd";
+import { Alert } from "react-native";
+import { AppError } from "@utils/AppError";
 
 type whichSelectedProps = "FIRST" | "SECOND" | "";
 
@@ -37,14 +42,27 @@ export function NewMeal() {
       today.getSeconds().toString()
   );
 
-  function handleSubmitForm() {
-    console.log({
-      name,
-      description,
-      date,
-      hour,
-      whichSelected,
-    });
+  async function handleSubmitForm() {
+    try {
+      const newMealData = {
+        date,
+        data: {
+          name,
+          description,
+          time: hour,
+          insideDiet: whichSelected === "FIRST" ? true : false,
+        },
+      };
+
+      await mealAdd(newMealData);
+    } catch (error) {
+      if (error instanceof AppError) {
+        Alert.alert("New meal", error.message);
+      } else {
+        console.warn(error);
+        Alert.alert("New meal", "Unable to add a new meal.");
+      }
+    }
   }
 
   return (
