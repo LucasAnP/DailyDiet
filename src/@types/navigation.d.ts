@@ -1,4 +1,5 @@
 import { NewMealSuccess } from "@screens/NewMealSuccess";
+import { MealStorageDTO } from "@storage/meal/mealStorageDTO";
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
@@ -10,6 +11,7 @@ export declare global {
       newMealSuccess: {
         success: boolean;
       };
+      mealDetails: MealStorageDTO;
     }
   }
 }

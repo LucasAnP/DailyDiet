@@ -3,4 +3,5 @@ export enum Route {
   STATISTICS = "statistics",
   NEWMEAL = "newMeal",
   NEWMEALSUCCESS = "newMealSuccess",
+  MEALDETAILS = "mealDetails",
 }

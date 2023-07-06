@@ -59,6 +59,10 @@ export function Home() {
     navigation.navigate(Route.NEWMEAL);
   }
 
+  function handleOpenMealDetails(date: string, meal) {
+    navigation.navigate(Route.MEALDETAILS, { date, data: meal });
+  }
+
   useFocusEffect(
     useCallback(() => {
       getMeals();
@@ -89,12 +93,14 @@ export function Home() {
           renderItem={({ item }) => (
             <>
               <SectionHeaderTitle>{item?.date}</SectionHeaderTitle>
-              {item?.data?.map((item, index) => (
+              {item?.data?.map((mealItem, index) => (
                 <Section
-                  key={`${item.name}-${index}`}
-                  time={item.time}
-                  title={item.name}
-                  insideDiet={item.insideDiet}
+                  activeOpacity={0.7}
+                  onPress={() => handleOpenMealDetails(item.date, mealItem)}
+                  key={`${mealItem.name}-${index}`}
+                  time={mealItem.time}
+                  title={mealItem.name}
+                  insideDiet={mealItem.insideDiet}
                 />
               ))}
             </>

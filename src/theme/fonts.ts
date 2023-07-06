@@ -25,6 +25,11 @@ export const FONT_SIZE = {
   xMedium: 18,
 
   /**
+   * 20
+   */
+  middle: 20,
+
+  /**
    * 24
    */
   large: 24,

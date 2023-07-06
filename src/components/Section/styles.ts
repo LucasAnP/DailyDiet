@@ -5,7 +5,7 @@ interface CircleProps {
   insideDiet?: boolean;
 }
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   padding: 14px 16px 14px 12px;
 
   border: 1px solid ${({ theme }) => theme.COLORS.GRAY_500};

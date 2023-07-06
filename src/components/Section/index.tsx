@@ -1,14 +1,15 @@
 import { CircleIcon, Container, Time, TimeContainer, Title } from "./styles";
+import { TouchableOpacityProps } from "react-native";
 
-interface Props {
+type Props = TouchableOpacityProps & {
   time: string;
   title: string;
   insideDiet: boolean;
-}
+};
 
-export function Section({ time, title, insideDiet }: Props) {
+export function Section({ time, title, insideDiet, ...rest }: Props) {
   return (
-    <Container>
+    <Container {...rest}>
       <TimeContainer>
         <Time>{time}</Time>
       </TimeContainer>

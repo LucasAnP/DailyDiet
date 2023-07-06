@@ -3,6 +3,7 @@ import { Home } from "@screens/Home";
 import { NewMeal } from "@screens/NewMeal";
 import { Statistics } from "@screens/Statistics";
 import { NewMealSuccess } from "@screens/NewMealSuccess";
+import { MealDetails } from "@screens/MealDetails";
 import { Route } from "./enums";
 
 const { Screen, Navigator } = createNativeStackNavigator();
@@ -14,6 +15,7 @@ export const AppRoutes = () => {
       <Screen name={Route.STATISTICS} component={Statistics} />
       <Screen name={Route.NEWMEAL} component={NewMeal} />
       <Screen name={Route.NEWMEALSUCCESS} component={NewMealSuccess} />
+      <Screen name={Route.MEALDETAILS} component={MealDetails} />
     </Navigator>
   );
 };
