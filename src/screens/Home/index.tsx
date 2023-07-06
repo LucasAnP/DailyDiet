@@ -24,38 +24,43 @@ export function Home() {
   const [mealsPercentage, setMealsPercentage] = useState(0);
   const [dailyMeals, setDailyMeals] = useState<MealStorageDTO[]>([]);
 
+  function calculePercent() {
+    if (dailyMeals.length > 0) {
+      const { percentDiet } = calculeIfMealsInDiet(dailyMeals);
+      setMealsPercentage(percentDiet);
+    }
+  }
+
   async function getMeals() {
     try {
       const mealsOfStorage = await mealGetAll();
       setDailyMeals(mealsOfStorage);
+      calculePercent();
     } catch (error) {
-      console.log(error);
+      if (error instanceof AppError) {
+        Alert.alert("Meals", error.message);
+      } else {
+        console.warn(error);
+        Alert.alert("Meals", "Error when getting meals.");
+      }
     }
   }
 
-  const handleGoStatisticsScreen = () => {
+  function handleGoStatisticsScreen() {
     navigation.navigate(Route.STATISTICS, {
       percentage: mealsPercentage,
       meals: dailyMeals,
       negative: mealsPercentage < 50,
     });
-  };
+  }
 
-  const handleGoNewMeal = () => {
+  function handleGoNewMeal() {
     navigation.navigate(Route.NEWMEAL);
-  };
-
-  const calculePercent = () => {
-    if (mealsPercentage > 0) {
-      const { percentDiet } = calculeIfMealsInDiet(dailyMeals);
-      setMealsPercentage(percentDiet);
-    }
-  };
+  }
 
   useFocusEffect(
     useCallback(() => {
       getMeals();
-      calculePercent();
     }, [])
   );
 

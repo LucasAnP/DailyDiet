@@ -18,7 +18,11 @@ export async function mealAdd(meal: MealStorageDTO) {
         temporaryMeals.splice(0, temporaryMeals.length, item);
       }
     });
-    const newMealArray = JSON.stringify(temporaryMeals);
+
+    const newMealArray =
+      temporaryMeals.length > 0
+        ? JSON.stringify(temporaryMeals)
+        : JSON.stringify([...storedMeals, meal]);
 
     await AsyncStorage.setItem(MEAL_COLLECTION, newMealArray);
   } catch (error) {

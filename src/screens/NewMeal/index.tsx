@@ -38,7 +38,7 @@ export function NewMeal() {
     today.toLocaleDateString("en-GB").toString()
   );
   const [hour, setHour] = useState(
-    today.getHours() + ":" + today.getMinutes() + ":".toString()
+    today.getHours() + ":" + today.getMinutes().toString()
   );
 
   async function handleSubmitForm() {

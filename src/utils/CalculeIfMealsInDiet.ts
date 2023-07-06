@@ -1,11 +1,11 @@
 import { MealStorageDTO } from "@storage/meal/mealStorageDTO";
 
 export function calculeIfMealsInDiet(meals: MealStorageDTO[]) {
-  let totalOfMeals = 0;
-  let insideDiet = 0;
-  let outSideDiet = 0;
-  let sequenceOfPlates = 0;
-  let percentDiet = 0;
+  let totalOfMeals: number = 0;
+  let insideDiet: number = 0;
+  let outSideDiet: number = 0;
+  let sequenceOfPlates: number = 0;
+  let percentDiet: any = 0;
 
   meals?.forEach((meal) => {
     if (meal?.data) {
@@ -23,7 +23,7 @@ export function calculeIfMealsInDiet(meals: MealStorageDTO[]) {
     }
   });
 
-  percentDiet = ((insideDiet / totalOfMeals) * 100).toFixed(2);
+  percentDiet = ((insideDiet / totalOfMeals) * 100).toFixed(0);
 
   return {
     percentDiet,
