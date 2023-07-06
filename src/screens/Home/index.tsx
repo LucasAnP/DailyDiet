@@ -85,7 +85,6 @@ export function Home() {
               <SectionHeaderTitle>{item.date}</SectionHeaderTitle>
               {item.data.map((item) => (
                 <Section
-                  key={(_, index) => item.name + index.toString()}
                   time={item.time}
                   title={item.name}
                   insideDiet={item.insideDiet}

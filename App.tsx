@@ -1,5 +1,5 @@
-import { ThemeProvider } from "styled-components";
 import { StatusBar } from "react-native";
+import { ThemeProvider } from "styled-components";
 import {
   useFonts,
   NunitoSans_400Regular,
