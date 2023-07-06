@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { FlatList } from "react-native";
+import { Alert, FlatList } from "react-native";
 import { Header } from "@components/Header";
 import {
   ClickIcon,
@@ -18,6 +18,7 @@ import { Highlight } from "@components/Highlight";
 import { calculeIfMealsInDiet } from "@utils/CalculeIfMealsInDiet";
 import { MealStorageDTO } from "@storage/meal/mealStorageDTO";
 import { mealGetAll } from "@storage/meal/mealGetAll";
+import { AppError } from "@utils/AppError";
 
 export function Home() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
