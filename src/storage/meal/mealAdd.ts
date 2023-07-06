@@ -9,14 +9,16 @@ export async function mealAdd(meal: MealStorageDTO) {
     const storedMeals = await mealGetAll();
 
     let temporaryMeals: MealStorageDTO[] = [];
-    storedMeals.forEach((item) => {
+    if (storedMeals.length == 0) {
+      temporaryMeals.push(meal);
+    }
+    storedMeals.map((item) => {
       if (item.date === meal.date) {
         item.data.push(meal?.data[0]);
-        temporaryMeals.push(item);
+        temporaryMeals.splice(0, temporaryMeals.length, item);
       }
     });
-
-    const newMealArray = JSON.stringify([...storedMeals, temporaryMeals]);
+    const newMealArray = JSON.stringify(temporaryMeals);
 
     await AsyncStorage.setItem(MEAL_COLLECTION, newMealArray);
   } catch (error) {

@@ -54,8 +54,8 @@ export function Home() {
 
   useFocusEffect(
     useCallback(() => {
-      calculePercent();
       getMeals();
+      calculePercent();
     }, [])
   );
 
@@ -82,9 +82,10 @@ export function Home() {
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => (
             <>
-              <SectionHeaderTitle>{item.date}</SectionHeaderTitle>
-              {item.data.map((item) => (
+              <SectionHeaderTitle>{item?.date}</SectionHeaderTitle>
+              {item?.data?.map((item, index) => (
                 <Section
+                  key={`${item.name}-${index}`}
                   time={item.time}
                   title={item.name}
                   insideDiet={item.insideDiet}

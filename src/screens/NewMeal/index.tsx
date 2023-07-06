@@ -22,10 +22,13 @@ import { MEAL_COLLECTION } from "@storage/storageConfig";
 import { mealAdd } from "@storage/meal/mealAdd";
 import { Alert } from "react-native";
 import { AppError } from "@utils/AppError";
+import { useNavigation } from "@react-navigation/native";
+import { Route } from "@routes/enums";
 
 type whichSelectedProps = "FIRST" | "SECOND" | "";
 
 export function NewMeal() {
+  const navigation = useNavigation();
   const [selected, setSelected] = useState(false);
   const [whichSelected, setWhichSelected] = useState<whichSelectedProps>("");
   const [name, setName] = useState("");
@@ -35,11 +38,7 @@ export function NewMeal() {
     today.toLocaleDateString("en-GB").toString()
   );
   const [hour, setHour] = useState(
-    today.getHours() +
-      ":" +
-      today.getMinutes() +
-      ":" +
-      today.getSeconds().toString()
+    today.getHours() + ":" + today.getMinutes() + ":".toString()
   );
 
   async function handleSubmitForm() {
@@ -57,6 +56,9 @@ export function NewMeal() {
       };
 
       await mealAdd(newMealData);
+      navigation.navigate(Route.NEWMEALSUCCESS, {
+        success: newMealData.data[0].insideDiet,
+      });
     } catch (error) {
       if (error instanceof AppError) {
         Alert.alert("New meal", error.message);
