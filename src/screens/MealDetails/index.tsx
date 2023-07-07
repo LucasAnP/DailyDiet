@@ -51,10 +51,13 @@ export function MealDetails() {
       </Content>
       <Button
         title="Edit meal"
+        addIcon="EDIT"
         style={{ marginHorizontal: 24, marginBottom: 9 }}
       />
       <Button
         title="Delete meal"
+        filled={false}
+        addIcon="DELETE"
         style={{
           marginHorizontal: 24,
           marginBottom: 32,
