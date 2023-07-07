@@ -26,11 +26,9 @@ export function Home() {
   const [dailyMeals, setDailyMeals] = useState<MealStorageDTO[]>([]);
 
   function calculePercent(meals: MealStorageDTO[]) {
-    if (dailyMeals.length > 0) {
+    if (dailyMeals?.length > 0) {
       const { percentDiet } = calculeIfMealsInDiet(meals);
       setMealsPercentage(percentDiet);
-    } else {
-      setMealsPercentage(0);
     }
   }
 

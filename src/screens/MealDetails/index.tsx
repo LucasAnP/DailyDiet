@@ -11,25 +11,17 @@ import {
   TimeTitle,
   Title,
 } from "./styles";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Button } from "@components/Button";
 import { StatusBar } from "expo-status-bar";
 import { useTheme } from "styled-components/native";
 import { mealDelete } from "@storage/meal/mealDelete";
-
-type Props = {
-  date: string;
-  data: {
-    name: string;
-    description: string;
-    time: string;
-    insideDiet: boolean;
-  }[];
-};
+import { Route } from "@routes/enums";
 
 export function MealDetails() {
   const route = useRoute();
   const theme = useTheme();
+  const navigation = useNavigation();
   const params = route.params;
 
   async function deleteMeal() {
@@ -39,6 +31,7 @@ export function MealDetails() {
         data: params.data,
       },
     });
+    navigation.navigate(Route.HOME);
   }
 
   function handleDeleteMeal() {
