@@ -1,3 +1,4 @@
+import { Alert } from "react-native";
 import { Header } from "@components/Header";
 import {
   CircleIcon,
@@ -10,11 +11,11 @@ import {
   TimeTitle,
   Title,
 } from "./styles";
-import { MealStorageDTO } from "@storage/meal/mealStorageDTO";
 import { useRoute } from "@react-navigation/native";
 import { Button } from "@components/Button";
 import { StatusBar } from "expo-status-bar";
 import { useTheme } from "styled-components/native";
+import { mealDelete } from "@storage/meal/mealDelete";
 
 type Props = {
   date: string;
@@ -30,6 +31,33 @@ export function MealDetails() {
   const route = useRoute();
   const theme = useTheme();
   const params = route.params;
+
+  async function deleteMeal() {
+    await mealDelete({
+      meal: {
+        date: params.date,
+        data: params.data,
+      },
+    });
+  }
+
+  function handleDeleteMeal() {
+    Alert.alert(
+      "Deletar",
+      "Tem certeza que deseja deletar esse meat?",
+      [
+        {
+          text: "Não",
+          style: "cancel",
+        },
+        {
+          text: "Sim",
+          onPress: () => deleteMeal(),
+        },
+      ],
+      { cancelable: false }
+    );
+  }
 
   return (
     <Container>
@@ -58,6 +86,7 @@ export function MealDetails() {
         title="Delete meal"
         filled={false}
         addIcon="DELETE"
+        onPress={handleDeleteMeal}
         style={{
           marginHorizontal: 24,
           marginBottom: 32,

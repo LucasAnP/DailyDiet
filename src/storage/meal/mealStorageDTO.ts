@@ -1,5 +1,5 @@
 export interface MealStorageDTO {
-  date: string;
+  date?: string;
   data: {
     name: string;
     description: string;

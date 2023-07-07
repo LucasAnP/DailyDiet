@@ -25,10 +25,12 @@ export function Home() {
   const [mealsPercentage, setMealsPercentage] = useState(0);
   const [dailyMeals, setDailyMeals] = useState<MealStorageDTO[]>([]);
 
-  function calculePercent() {
+  function calculePercent(meals: MealStorageDTO[]) {
     if (dailyMeals.length > 0) {
-      const { percentDiet } = calculeIfMealsInDiet(dailyMeals);
+      const { percentDiet } = calculeIfMealsInDiet(meals);
       setMealsPercentage(percentDiet);
+    } else {
+      setMealsPercentage(0);
     }
   }
 
@@ -36,7 +38,7 @@ export function Home() {
     try {
       const mealsOfStorage = await mealGetAll();
       setDailyMeals(mealsOfStorage);
-      calculePercent();
+      calculePercent(mealsOfStorage);
     } catch (error) {
       if (error instanceof AppError) {
         Alert.alert("Meals", error.message);

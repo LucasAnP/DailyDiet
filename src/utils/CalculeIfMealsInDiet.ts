@@ -7,16 +7,18 @@ export function calculeIfMealsInDiet(meals: MealStorageDTO[]) {
   let sequenceOfPlates: number = 0;
   let percentDiet: any = 0;
 
+  console.log(meals);
+
   meals?.forEach((meal) => {
     if (meal?.data) {
       let sequence = 0;
       meal?.data?.forEach((element) => {
-        totalOfMeals++;
+        totalOfMeals += 1;
         if (element.insideDiet) {
-          insideDiet++;
-          sequence++;
+          totalOfMeals += 1;
+          totalOfMeals += 1;
         } else {
-          outSideDiet++;
+          totalOfMeals += 1;
         }
       });
       if (sequence > sequenceOfPlates) sequenceOfPlates = sequence;
