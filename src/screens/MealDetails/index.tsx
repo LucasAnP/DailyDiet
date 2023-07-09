@@ -31,7 +31,11 @@ export function MealDetails() {
         data: params.data,
       },
     });
-    // navigation.navigate(Route.HOME);
+    navigation.navigate(Route.HOME);
+  }
+
+  async function editMeal() {
+    navigation.navigate(Route.EDITMEAL, { params });
   }
 
   function handleDeleteMeal() {
@@ -73,6 +77,7 @@ export function MealDetails() {
       <Button
         title="Edit meal"
         addIcon="EDIT"
+        onPress={editMeal}
         style={{ marginHorizontal: 24, marginBottom: 9 }}
       />
       <Button
