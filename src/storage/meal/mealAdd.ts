@@ -10,23 +10,24 @@ export async function mealAdd(meal: MealStorageDTO) {
 
     let temporaryMeals: MealStorageDTO[] = storedMeals;
 
-    if (temporaryMeals.length == 0) {
+    if (temporaryMeals.length === 0) {
       temporaryMeals.push(meal);
     } else {
-      temporaryMeals.map((item, index) => {
+      temporaryMeals.forEach((item, index) => {
+        console.log("Inside function");
         if (item.date === meal.date) {
-          temporaryMeals[index].data.push(meal?.data[0]);
+          console.log("Inside one");
+          return temporaryMeals[index].data.push(meal?.data[0]);
         } else {
-          if (!temporaryMeals.includes(meal)) {
-            temporaryMeals.push(meal);
-          }
+          console.log("Inside two");
+          return temporaryMeals.push(meal);
         }
       });
     }
+    console.log(temporaryMeals);
+    // const newMealArray = JSON.stringify(temporaryMeals);
 
-    const newMealArray = JSON.stringify(temporaryMeals);
-
-    await AsyncStorage.setItem(MEAL_COLLECTION, newMealArray);
+    // await AsyncStorage.setItem(MEAL_COLLECTION, newMealArray);
   } catch (error) {
     throw error;
   }

@@ -35,6 +35,7 @@ export function Home() {
   async function getMeals() {
     try {
       const mealsOfStorage = await mealGetAll();
+      console.log("mealsOfStorage", mealsOfStorage);
       setDailyMeals(mealsOfStorage);
       calculePercent(mealsOfStorage);
     } catch (error) {
