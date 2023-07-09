@@ -21,10 +21,9 @@ export async function mealAdd(meal: MealStorageDTO) {
         }
       }
     }
-    console.log(temporaryMeals);
-    // const newMealArray = JSON.stringify(temporaryMeals);
+    const newMealArray = JSON.stringify(temporaryMeals);
 
-    // await AsyncStorage.setItem(MEAL_COLLECTION, newMealArray);
+    await AsyncStorage.setItem(MEAL_COLLECTION, newMealArray);
   } catch (error) {
     throw error;
   }

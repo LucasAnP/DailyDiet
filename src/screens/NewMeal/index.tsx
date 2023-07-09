@@ -56,9 +56,9 @@ export function NewMeal() {
       };
 
       await mealAdd(newMealData);
-      // navigation.navigate(Route.NEWMEALSUCCESS, {
-      //   success: newMealData.data[0].insideDiet,
-      // });
+      navigation.navigate(Route.NEWMEALSUCCESS, {
+        success: newMealData.data[0].insideDiet,
+      });
     } catch (error) {
       if (error instanceof AppError) {
         Alert.alert("New meal", error.message);
