@@ -13,16 +13,13 @@ export async function mealAdd(meal: MealStorageDTO) {
     if (temporaryMeals.length === 0) {
       temporaryMeals.push(meal);
     } else {
-      temporaryMeals.forEach((item, index) => {
-        console.log("Inside function");
-        if (item.date === meal.date) {
-          console.log("Inside one");
+      for (let index = 0; index < temporaryMeals.length; index++) {
+        if (temporaryMeals[index].date === meal.date) {
           return temporaryMeals[index].data.push(meal?.data[0]);
         } else {
-          console.log("Inside two");
           return temporaryMeals.push(meal);
         }
-      });
+      }
     }
     console.log(temporaryMeals);
     // const newMealArray = JSON.stringify(temporaryMeals);
