@@ -31,7 +31,7 @@ export function MealDetails() {
         data: params.data,
       },
     });
-    navigation.navigate(Route.HOME);
+    // navigation.navigate(Route.HOME);
   }
 
   function handleDeleteMeal() {

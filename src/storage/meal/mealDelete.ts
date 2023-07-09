@@ -7,18 +7,22 @@ import { mealGetAll } from "./mealGetAll";
 export async function mealDelete({ meal }: MealStorageDTO) {
   try {
     const storedMeals = await mealGetAll();
-    const storedNewArray = storedMeals.map((item, itemIndex) => {
+
+    let temporaryMeals: MealStorageDTO[] = storedMeals;
+    temporaryMeals.forEach((item, itemIndex) => {
       if (item.date === meal.date) {
         item.data.forEach((_, index) => {
-          if ((item.data[index] = meal)) item.data.splice(index, 1);
+          if ((temporaryMeals[itemIndex].data[index] = meal)) {
+            if (temporaryMeals[itemIndex].data.length <= 1) {
+              temporaryMeals.splice(itemIndex, 1);
+            } else {
+              temporaryMeals[itemIndex].data.splice(index, 1);
+            }
+          }
         });
       }
-      if (item.data.length <= 1) {
-        storedMeals.splice(itemIndex, 1);
-      }
-      return item;
     });
-    const newArray = JSON.stringify(storedNewArray);
+    const newArray = JSON.stringify(temporaryMeals);
     await AsyncStorage.setItem(MEAL_COLLECTION, newArray);
   } catch (error) {
     throw error;
